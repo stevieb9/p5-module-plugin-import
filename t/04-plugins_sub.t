@@ -8,6 +8,10 @@ use Test::More;
 
 my $file = 't/base/Testing.pm';
 
+{ # can't load plugin
+    my $ret = plugins('blah.pm');
+    is ($ret, 0, "if plugin can't be loaded, ok");
+}
 { # file
     my @plugins = plugins($file);
     is (@plugins, 1, "with file, got the correct number of plugins");
@@ -52,4 +56,6 @@ SKIP: { # module test
     unlink 'Testing.pm';
     ok (! -e 'Testing.pm', "unlinked file ok");
 }
+
+
 done_testing;

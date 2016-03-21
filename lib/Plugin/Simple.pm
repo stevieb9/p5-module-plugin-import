@@ -92,10 +92,6 @@ sub _load {
     if ($loaded) {
         return $plugin;
     }
-    else {
-       warn "failed to load $plugin\n";
-       return 0;
-    }       
 }
 sub _plugins {
     shift if ref $_[0]; # dump the calling object if present
