@@ -1,4 +1,4 @@
-Module-Plugin-Import
+Plugin-Simple
 
 The README is used to introduce the module and provide instructions on
 how to install the module, any machine dependencies it may have (for
@@ -26,21 +26,21 @@ SUPPORT AND DOCUMENTATION
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc Module::Plugin::Import
+    perldoc Plugin::Simple
 
 You can also look for information at:
 
     RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Module-Plugin-Import
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Plugin-Simple
 
     AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Module-Plugin-Import
+        http://annocpan.org/dist/Plugin-Simple
 
     CPAN Ratings
-        http://cpanratings.perl.org/d/Module-Plugin-Import
+        http://cpanratings.perl.org/d/Plugin-Simple
 
     Search CPAN
-        http://search.cpan.org/dist/Module-Plugin-Import/
+        http://search.cpan.org/dist/Plugin-Simple/
 
 
 LICENSE AND COPYRIGHT

@@ -1,4 +1,4 @@
-#!perl -T
+#!perl
 use 5.006;
 use strict;
 use warnings;
@@ -7,7 +7,7 @@ use Test::More;
 plan tests => 1;
 
 BEGIN {
-    use_ok( 'Module::Plugin::Import' ) || print "Bail out!\n";
+    use_ok( 'Plugin::Simple' ) || print "Bail out!\n";
 }
 
-diag( "Testing Module::Plugin::Import $Module::Plugin::Import::VERSION, Perl $], $^X" );
+use Plugin::Simple sub_name => 'blah';

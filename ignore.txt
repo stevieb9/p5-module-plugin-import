@@ -14,5 +14,5 @@ inc/
 nytprof.out
 pod2htm*.tmp
 pm_to_blib
-Module-Plugin-Import-*
-Module-Plugin-Import-*.tar.gz
+Plugin-Simple-*
+Plugin-Simple-*.tar.gz

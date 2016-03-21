@@ -4,10 +4,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME             => 'Module::Plugin::Import',
+    NAME             => 'Plugin::Simple',
     AUTHOR           => q{Steve Bertrand <steveb@cpan.org>},
-    VERSION_FROM     => 'lib/Module/Plugin/Import.pm',
-    ABSTRACT_FROM    => 'lib/Module/Plugin/Import.pm',
+    VERSION_FROM     => 'lib/Plugin/Simple.pm',
+    ABSTRACT_FROM    => 'lib/Plugin/Simple.pm',
     LICENSE          => 'perl_5',
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
@@ -22,5 +22,5 @@ WriteMakefile(
         #'Foo::Bar::Module' => 5.0401,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'Module-Plugin-Import-*' },
+    clean => { FILES => 'Plugin-Simple-*' },
 );
