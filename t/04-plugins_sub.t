@@ -17,7 +17,7 @@ SKIP: { # module test
     my @ret = plugins('DateTime');
 
     skip 'test mod not installed', 2, unless defined $INC{'DateTime.pm'};
-    ok (@ret >= 5, "with an example item, things appear ok");
+    ok (@ret >= 1, "with an example item, things appear ok");
     is ($ret[0], 'DateTime', 'returned plugin is correct');
     can_ok('DateTime', 'new');
 };

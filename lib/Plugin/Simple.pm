@@ -178,9 +178,9 @@ Plugin::Simple - Load plugins from files or modules.
 
     @plugins = plugins('/path/to/MyModule.pm');
 
-    # load/return only the plugins that has a specific function
+    # load/return only the plugins that can perform specific functions
 
-    @plugins = plugins(can => ['foo', 'bar]);
+    @plugins = plugins(can => ['foo', 'bar]); # foo and bar
 
     # instead of importing 'plugins()', change the name:
 
