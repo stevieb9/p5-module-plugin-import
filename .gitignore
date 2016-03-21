@@ -3,14 +3,14 @@ Makefile
 *.bak
 *.swp
 *.bak
-test/
 .hg/
 .git/
 MYMETA.*
 *.tar.gz
 _build/
 blib/
-Build
+test/
+Build/
 META.json
 META.yml
 *.old
