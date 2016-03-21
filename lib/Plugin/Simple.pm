@@ -15,7 +15,6 @@ my $self;
 sub import {
     my ($class, %opts) = @_;
 
-
     $self = __PACKAGE__->_new(%opts);
 
     my $sub_name = $opts{sub_name} ? $opts{sub_name} : 'plugins';
