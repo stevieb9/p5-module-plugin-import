@@ -32,6 +32,7 @@ sub _config {
     for (keys %opts){
         $self->{$_} = $opts{$_};
     }
+    return $self;
 }
 sub _new {
     my ($class, %args) = @_;

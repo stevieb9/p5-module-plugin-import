@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 
+use File::Copy;
 use Plugin::Simple cache => 1;
 use Test::More;
 
@@ -40,5 +41,15 @@ SKIP: { # module test
 { # can with wrong prototype
     my $ok = eval { plugins(can => ['hello'], 'this'); 1; };
     ok (! $ok, "with wrong order of params, plugins() croaks");
+}
+{ # file in cwd
+    copy 't/base/Testing.pm', '.';
+
+    my @plugins = plugins('Testing.pm');
+    is (@plugins, 1, "plugin file in cwd works ok");
+    ok ($plugins[0]->can('hello'),"file in cwd plugin can ok");
+
+    unlink 'Testing.pm';
+    ok (! -e 'Testing.pm', "unlinked file ok");
 }
 done_testing;
