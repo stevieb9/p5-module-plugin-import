@@ -22,19 +22,23 @@ SKIP: { # module test
     can_ok('DateTime', 'new');
 };
 { # can param bad
-    my @plugins = plugins($file, can => 'blah');
+    my @plugins = plugins($file, can => ['blah']);
     is (@plugins, 0, "if plugin can()t, it isn't returned");
 }
 { # can param good
-    my @plugins = plugins($file, can => 'hello');
+    my @plugins = plugins($file, can => ['hello']);
     is (@plugins, 1, "if plugin can(), it's returned");
 }
+{ # can with multiple options
+    my @plugins = plugins($file, can => ['hello', 'goodbye']);
+    is (@plugins, 1, "if plugin can() multiple, it's returned");
+}
 { # can w/o item
-    my @plugins = plugins(can => 'hello');
+    my @plugins = plugins(can => ['hello']);
     is (@plugins, 0, "'can' can be sent in without item");
 }
 { # can with wrong prototype
-    my $ok = eval { plugins(can => 'hello', 'this'); 1; };
+    my $ok = eval { plugins(can => ['hello'], 'this'); 1; };
     ok (! $ok, "with wrong order of params, plugins() croaks");
 }
 done_testing;

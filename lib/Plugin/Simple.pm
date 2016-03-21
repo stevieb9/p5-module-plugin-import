@@ -8,69 +8,24 @@ use Data::Dumper;
 use ExtUtils::Installed;
 use Module::Load;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my $self;
 
 sub import {
     my ($class, %opts) = @_;
 
-    my $pkg = (caller)[0];
 
-    $self = __PACKAGE__->new(%opts);
-
-    my $sub = sub {
-        shift if ref $_[0] eq $pkg;
-
-        my ($item, $can);
-
-        if ($_[0] && $_[0] eq 'can'){
-            shift;
-            $can = shift;
-        }
-        else {
-            $item = shift;
-            shift;
-            $can = shift;
-        }
-
-        if (@_){
-            croak "usage: plugin(['Load::From'], [can => 'sub']), " .
-                  "in that order\n";
-        }
-        my @plugins;
-
-        if ($item){
-            if (-e $item){
-                @plugins = $self->_load($item);
-            }
-            else{ 
-                @plugins = $self->_search($pkg, $item);
-            }
-        }
-        if (! @plugins){    
-            @plugins = _search($pkg);
-        }
-
-        my @wanted_plugins;
-
-        if ($can){
-            for (@plugins){
-                if ($_->can($can)){
-                    push @wanted_plugins, $_;
-                }
-            }
-            return @wanted_plugins;
-        }
-        return @plugins;
-    };
+    $self = __PACKAGE__->_new(%opts);
 
     my $sub_name = $opts{sub_name} ? $opts{sub_name} : 'plugins';
 
     {
         no warnings 'redefine';
         no strict 'refs';
-        *{"$pkg\::$sub_name"} = $sub;
+
+        my $pkg = (caller)[0];
+        *{"$pkg\::$sub_name"} = \&_plugins;
     }
 }
 sub _config {
@@ -79,7 +34,7 @@ sub _config {
         $self->{$_} = $opts{$_};
     }
 }
-sub new {
+sub _new {
     my ($class, %args) = @_;
     my $self = bless \%args, $class;
 
@@ -142,11 +97,67 @@ sub _load {
        return 0;
     }       
 }
+sub _plugins {
+    shift if ref $_[0]; # dump the calling object if present
+
+    my ($item, $can);
+
+    if ($_[0] && $_[0] eq 'can'){
+        shift;
+        $can = shift;
+    }
+    else {
+        $item = shift;
+        shift;
+        $can = shift;
+    }
+
+    if (@_){
+        croak "usage: plugin(['Load::From'], [can => 'sub']), " .
+              "in that order\n";
+    }
+
+    my $pkg = (caller)[0];
+    my @plugins;
+
+    if ($item){
+        if (-e $item){
+            @plugins = $self->_load($item);
+        }
+        else{
+            @plugins = $self->_search($pkg, $item);
+        }
+    }
+    if (! @plugins){
+        @plugins = _search($pkg);
+    }
+
+    my @wanted_plugins;
+
+    if ($can) {
+        for my $mod (@plugins) {
+            my $can_count = 0;
+            for my $sub (@$can){
+                if ($mod->can($sub)){
+                    $can_count++;
+                }
+            }
+            push @wanted_plugins, $mod if $can_count == @$can;
+        }
+        return @wanted_plugins;
+    }
+    return @plugins;
+}
+
 1;
 
 =head1 NAME
 
 Plugin::Simple - Load plugins from files or modules.
+
+=for html
+<a href="http://travis-ci.org/stevieb9/plugin-simple"><img src="https://secure.travis-ci.org/stevieb9/plugin-simple.png"/>
+<a href='https://coveralls.io/github/stevieb9/plugin-simple?branch=master'><img src='https://coveralls.io/repos/stevieb9/plugin-simple/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>gg
 
 =head1 SYNOPSIS
 
@@ -170,7 +181,7 @@ Plugin::Simple - Load plugins from files or modules.
 
     # load/return only the plugins that has a specific function
 
-    @plugins = plugins(can => 'foo');
+    @plugins = plugins(can => ['foo', 'bar]);
 
     # instead of importing 'plugins()', change the name:
 

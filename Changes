@@ -1,5 +1,9 @@
 Revision history for Plugin-Simple
 
-0.01    Date/time
+0.02    2016-03-21
+        - added 'can => [sub1, sub2]' param to plugin()
+        - ability to load plugins from a file
+
+0.01    2016-03-21
         First version, released on an unsuspecting world.
 

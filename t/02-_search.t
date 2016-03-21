@@ -5,7 +5,7 @@ use warnings;
 use Plugin::Simple;
 use Test::More;
 
-my $ps = Plugin::Simple->new;
+my $ps = Plugin::Simple->_new;
 
 { # empty search
     my @ret = $ps->_search('main');
