@@ -8,7 +8,7 @@ use Data::Dumper;
 use ExtUtils::Installed;
 use Module::Load;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my $self;
 
@@ -181,8 +181,14 @@ Plugin::Simple - Load plugins from files or modules.
 
     # instead of importing 'plugins()', change the name:
 
-    use Simple::Plugin sub_name => 'blah';
-    @plugins = blah(...);
+    use Simple::Plugin sub_name => 'foo';
+    @plugins = foo(...);
+
+    # do something with the plugins
+
+    for my $plugin (@plugins){
+        $plugin->plugin_func(@args);
+    }
 
 =head1 DESCRIPTION
 

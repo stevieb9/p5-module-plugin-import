@@ -28,8 +28,14 @@ SYNOPSIS
     
         # instead of importing 'plugins()', change the name:
     
-        use Simple::Plugin sub_name => 'blah';
-        @plugins = blah(...);
+        use Simple::Plugin sub_name => 'foo';
+        @plugins = foo(...);
+    
+        # do something with the plugins
+    
+        for my $plugin (@plugins){
+            $plugin->plugin_func(@args);
+        }
 
 DESCRIPTION
 
