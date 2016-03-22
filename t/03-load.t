@@ -9,12 +9,11 @@ my $ps = Plugin::Simple->_new;
 my $file = 't/base/Testing.pm';
 
 SKIP: { # module test
-    my @ret = $ps->_load('DateTime');
+    my @ret = $ps->_load('Plugin::Simple');
 
-    skip 'test mod not installed', 2, unless defined $INC{'DateTime.pm'};
     is (@ret, 1, "with an example item, things appear ok");
-    is ($ret[0], 'DateTime', 'returned plugin is correct');
-    can_ok('DateTime', 'new');
+    is ($ret[0], 'Plugin::Simple', 'returned plugin is correct');
+    can_ok('Plugin::Simple', '_load');
 };
 { # file
     my @ret = $ps->_load($file);

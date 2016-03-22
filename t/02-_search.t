@@ -12,14 +12,14 @@ my $ps = Plugin::Simple->_new;
     is (@ret, 0, "#FIXME: by default, empty search returns nothing");
 }
 {
-    my @ret = $ps->_search('main', 'Test::BrewBuild::Plugin::DefaultExec');
+    my @ret = $ps->_search('main', 'Plugin::Simple');
 
     ok (@ret >= 1, "with an example item, things appear ok");
-    can_ok('Test::BrewBuild::Plugin::DefaultExec', 'brewbuild_exec');
+    can_ok('Plugin::Simple', '_search');
 }
 { # numerous
-    my @ret = $ps->_search('main', 'Test::BrewBuild::Plugin::');
-    is (@ret, 2, 'proper count of files with multi-search enabled');
+    my @ret = $ps->_search('main', 'Module::');
+    ok (@ret >= 10, 'proper count of files with multi-search enabled');
 }
 done_testing();
 
