@@ -1,5 +1,13 @@
 Revision history for Plugin-Simple
 
+0.05    2016-03-22
+        - removed _cache()
+        - removed _config()
+        - updated POD to reflect 'default' option
+        - fixed bug where default plugin wasn't being loaded before can() was 
+          being tested
+
+
 0.04    2016-03-21
         - in scalar context, plugins() will return the first plugin found
         - we now use Module::Load to do the dirty work, as ExtUtils::Installed
