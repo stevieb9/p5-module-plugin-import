@@ -4,8 +4,7 @@ use strict;
 use warnings;
 
 use Carp qw(croak);
-use Data::Dumper;
-use ExtUtils::Installed;
+use Module::List qw(list_modules);
 use Module::Load;
 
 our $VERSION = '0.04';
@@ -44,27 +43,32 @@ sub _cache {
     if ($self->{cache}){
         return @{ $self->{modules} } if $self->{modules};
     }
-
-    my $inst = ExtUtils::Installed->new;
-    @{ $self->{modules} } = $inst->modules;
-
-    return @{ $self->{modules} };
 }
 sub _search {
     my ($self, $pkg, $item) = @_;
 
-    my @modules = _cache();
-
     my @plugins;
 
     if ($item){
-        @plugins = grep { $_ =~ /^$item/ } @modules;
-        push @plugins, $item;
+        if ($item !~ /::$/){
+            push @plugins, $item;
+        }
+        else {
+            my $candidates;
+            eval { $candidates = list_modules(
+                    $item,
+                    {list_modules => 1, recurse => 1}
+                );
+            };
+            push @plugins, keys %$candidates;
+        }
     }
     else {
         my $path = $pkg;
-        $path .= '::Plugin';
-        @plugins = grep { $_ =~ /^$path/ } @modules;
+        $path .= '::Plugin::';
+        my $candidates = {};
+        eval { $candidates = list_modules($path, {list_modules => 1, recurse => 1}); };
+        push @plugins, keys %$candidates;
     }
 
     my @loaded;
@@ -74,7 +78,7 @@ sub _search {
         push @loaded, $ok;
     }
 
-    return @plugins;
+    return @loaded;
 }
 sub _load {
     my ($self, $plugin) = @_;
@@ -118,8 +122,13 @@ sub _plugins {
     my @plugins;
 
     if ($item){
-        if (-e $item){
-            @plugins = $self->_load($item);
+        if ($item =~ /(?:\.pm|\.pl)/){
+            if (-e $item){
+                @plugins = $self->_load($item);
+            }
+            else {
+                return undef;
+            }
         }
         else{
             @plugins = $self->_search($pkg, $item);
@@ -170,15 +179,11 @@ Plugin::Simple - Load plugins from files or modules.
 
     # load all modules under '__PACKAGE__::Plugin' namespace
 
-    my @plugins = plugins();
+    my @plugins = plugins(); # call in scalar context to retrieve the first one
 
-    # load all plugins under a specific namespace
+    # load all plugins under a specific namespace (note the trailing ::)
 
-    @plugins = plugins('Any::Namespace');
-
-    # load a plugin module from a file
-
-    @plugins = plugins('/path/to/MyModule.pm');
+    @plugins = plugins('Any::Namespace::');
 
     # load/return only the plugins that can perform specific functions
 
@@ -202,8 +207,8 @@ Plugin::Simple - Load plugins from files or modules.
 =head1 DESCRIPTION
 
 There are many plugin modules available on the CPAN, but I wrote this one just
-for fun. It's very simple, extremely lightweight (core only), and is extremely
-minimalistic in what it does.
+for fun. It's very simple, extremely lightweight, and is extremely minimalistic
+in what it does.
 
 It searches for modules in installed packages or non-installed files, and loads
 them (without string C<eval>). You can optionally have us return only the

@@ -2,6 +2,8 @@ Revision history for Plugin-Simple
 
 0.04    x
         - in scalar context, plugins() will return the first plugin found
+        - we now use Module::Load to do the dirty work, as ExtUtils::Installed
+          relies on .packlist files, which not all modules use
 
 0.03    2016-03-21
         - fixed github links

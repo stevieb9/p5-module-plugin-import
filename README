@@ -12,15 +12,11 @@ SYNOPSIS
     
         # load all modules under '__PACKAGE__::Plugin' namespace
     
-        my @plugins = plugins();
+        my @plugins = plugins(); # call in scalar context to retrieve the first one
     
-        # load all plugins under a specific namespace
+        # load all plugins under a specific namespace (note the trailing ::)
     
-        @plugins = plugins('Any::Namespace');
-    
-        # load a plugin module from a file
-    
-        @plugins = plugins('/path/to/MyModule.pm');
+        @plugins = plugins('Any::Namespace::');
     
         # load/return only the plugins that can perform specific functions
     
@@ -44,8 +40,8 @@ SYNOPSIS
 DESCRIPTION
 
     There are many plugin modules available on the CPAN, but I wrote this
-    one just for fun. It's very simple, extremely lightweight (core only),
-    and is extremely minimalistic in what it does.
+    one just for fun. It's very simple, extremely lightweight, and is
+    extremely minimalistic in what it does.
 
     It searches for modules in installed packages or non-installed files,
     and loads them (without string eval). You can optionally have us return
