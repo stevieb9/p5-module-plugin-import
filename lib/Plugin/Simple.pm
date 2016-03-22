@@ -8,7 +8,7 @@ use Data::Dumper;
 use ExtUtils::Installed;
 use Module::Load;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 my $self;
 
