@@ -32,11 +32,6 @@ sub _new {
 
     return $self;
 }
-sub _cache {
-    if ($self->{cache}){
-        return @{ $self->{modules} } if $self->{modules};
-    }
-}
 sub _search {
     my ($self, $pkg, $item) = @_;
 
@@ -60,7 +55,13 @@ sub _search {
         my $path = $pkg;
         $path .= '::Plugin::';
         my $candidates = {};
-        eval { $candidates = list_modules($path, {list_modules => 1, recurse => 1}); };
+        eval { $candidates = list_modules(
+                $path,
+                {
+                    list_modules => 1,
+                    recurse => 1}
+                );
+        };
         push @plugins, keys %$candidates;
     }
 
