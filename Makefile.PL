@@ -18,12 +18,16 @@ WriteMakefile(
     },
     PREREQ_PM => {
         'Module::Load' => 0,
+        'Module::List' => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Plugin-Simple-*' },
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
         resources => {
+            bugtracker => {
+                web => 'https://github.com/stevieb9/p5-plugin-simple/issues',
+            },
             repository => {
                 type => 'git',
                 url  => 'https://github.com/stevieb9/p5-plugin-simple.git',
