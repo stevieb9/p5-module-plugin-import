@@ -1,5 +1,8 @@
 Revision history for Plugin-Simple
 
+0.04    x
+        - in scalar context, plugins() will return the first plugin found
+
 0.03    2016-03-21
         - fixed github links
         - cleaned up POD errors

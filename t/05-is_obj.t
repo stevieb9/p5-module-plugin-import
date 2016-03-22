@@ -12,8 +12,8 @@ use TestPackage;
     my $obj = TestPackage->new;
     can_ok($obj, 'plugins');
 
-    is ($obj->plugins, 0, "an obj call to plugins works");
-    is ($obj->plugins('t/base/Testing.pm'), 1, "an obj call to plugins with file works");
+    is ($obj->plugins, undef, "an obj call to plugins works");
+    is ($obj->plugins('t/base/Testing.pm'), 'Testing', "an obj call to plugins with file works");
 }
 
 done_testing();

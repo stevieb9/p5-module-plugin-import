@@ -140,9 +140,10 @@ sub _plugins {
             }
             push @wanted_plugins, $mod if $can_count == @$can;
         }
-        return @wanted_plugins;
+        return wantarray ? @wanted_plugins : $wanted_plugins[0];
     }
-    return @plugins;
+
+    return wantarray ? @plugins : $plugins[0];
 }
 
 1;

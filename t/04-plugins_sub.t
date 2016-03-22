@@ -10,7 +10,7 @@ my $file = 't/base/Testing.pm';
 
 { # can't load plugin
     my $ret = plugins('blah.pm');
-    is ($ret, 0, "if plugin can't be loaded, ok");
+    is ($ret, undef, "if plugin can't be loaded, ok");
 }
 { # file
     my @plugins = plugins($file);
@@ -18,6 +18,12 @@ my $file = 't/base/Testing.pm';
     is ($plugins[0], 'Testing', "...and the plugin name is ok");
     is ($plugins[0]->hello(), 'hello, world!', "...and the sub output ok");
 }
+{ # scalar context
+    my $plugin = plugins($file);
+    is ($plugin, 'Testing', "...return is ok in scalar context");
+    is ($plugin->hello(), 'hello, world!', "...and the sub output ok");
+}
+
 SKIP: { # module test
     my @ret = plugins('DateTime');
 
