@@ -26,13 +26,6 @@ sub import {
         *{"$pkg\::$sub_name"} = \&_plugins;
     }
 }
-sub _config {
-    my ($self, %opts) = @_;
-    for (keys %opts){
-        $self->{$_} = $opts{$_};
-    }
-    return $self;
-}
 sub _new {
     my ($class, %args) = @_;
     my $self = bless \%args, $class;
