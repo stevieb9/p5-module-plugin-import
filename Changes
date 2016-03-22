@@ -1,5 +1,9 @@
 Revision history for Plugin-Simple
 
+0.03    2016-03-21
+        - fixed github links
+        - cleaned up POD errors
+
 0.02    2016-03-21
         - added 'can => [sub1, sub2]' param to plugin()
         - ability to load plugins from a file

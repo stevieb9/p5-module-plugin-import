@@ -152,8 +152,8 @@ sub _plugins {
 Plugin::Simple - Load plugins from files or modules.
 
 =for html
-<a href="http://travis-ci.org/stevieb9/plugin-simple"><img src="https://secure.travis-ci.org/stevieb9/plugin-simple.png"/>
-<a href='https://coveralls.io/github/stevieb9/plugin-simple?branch=master'><img src='https://coveralls.io/repos/stevieb9/plugin-simple/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>gg
+<a href="http://travis-ci.org/stevieb9/p5-plugin-simple"><img src="https://secure.travis-ci.org/stevieb9/p5-plugin-simple.png"/>
+<a href='https://coveralls.io/github/stevieb9/p5-plugin-simple?branch=master'><img src='https://coveralls.io/repos/stevieb9/p5-plugin-simple/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>gg
 
 =head1 SYNOPSIS
 
@@ -181,7 +181,7 @@ Plugin::Simple - Load plugins from files or modules.
 
     # instead of importing 'plugins()', change the name:
 
-    use Simple::Plugin sub_name => 'foo';
+    use Plugin::Simple sub_name => 'foo';
     @plugins = foo(...);
 
     # do something with the plugins
@@ -189,6 +189,10 @@ Plugin::Simple - Load plugins from files or modules.
     for my $plugin (@plugins){
         $plugin->plugin_func(@args);
     }
+
+    # works in OO modules too simply by using it
+
+    my @plugins = $self->plugins();
 
 =head1 DESCRIPTION
 
@@ -204,7 +208,7 @@ plugins that C<can()> perform a specific task.
 
 None. We simply install a C<plugin()> function within the namespace of the
 package that C<use>d us. To specify a different sub name, use this module as
-such: C<use Plugin::Simple sub_name => 'name_of_sub';>.
+such: C<use Plugin::Simple sub_name =E<gt> 'name_of_sub';>.
 
 =head1 AUTHOR
 

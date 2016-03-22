@@ -28,7 +28,7 @@ SYNOPSIS
     
         # instead of importing 'plugins()', change the name:
     
-        use Simple::Plugin sub_name => 'foo';
+        use Plugin::Simple sub_name => 'foo';
         @plugins = foo(...);
     
         # do something with the plugins
@@ -36,6 +36,10 @@ SYNOPSIS
         for my $plugin (@plugins){
             $plugin->plugin_func(@args);
         }
+    
+        # works in OO modules too simply by using it
+    
+        my @plugins = $self->plugins();
 
 DESCRIPTION
 
@@ -51,7 +55,7 @@ FUNCTIONS/METHODS
 
     None. We simply install a plugin() function within the namespace of the
     package that used us. To specify a different sub name, use this module
-    as such: use Plugin::Simple sub_name = 'name_of_sub';>.
+    as such: use Plugin::Simple sub_name => 'name_of_sub';.
 
 AUTHOR
 
