@@ -188,6 +188,10 @@ Plugin::Simple - Load plugins from files or modules.
     use Plugin::Simple sub_name => 'foo';
     @plugins = foo(...);
 
+    # set a default fallback plugin if searching turns up nothing
+
+    use Plugin::Simple default => 'My::Module::Plugin::DefaultPlugin'
+
     # do something with the plugins
 
     for my $plugin (@plugins){
@@ -208,11 +212,22 @@ It searches for modules in installed packages or non-installed files, and loads
 them (without string C<eval>). You can optionally have us return only the
 plugins that C<can()> perform a specific task.
 
+=head1 LOAD OPTIONS
+
+By default, we force C<plugins()> into your namespace. To change this name:
+
+    use Plugin::Simple sub_name => 'other_name';
+
+If searching fails, you can ensure a default known plugin gets loaded:
+
+    use Plugin::Simple default => 'My::Plugin';
+
+To use both options, simply separate them with a comma.
+
 =head1 FUNCTIONS/METHODS
 
 None. We simply install a C<plugin()> function within the namespace of the
-package that C<use>d us. To specify a different sub name, use this module as
-such: C<use Plugin::Simple sub_name =E<gt> 'name_of_sub';>.
+package that C<use>d us.
 
 =head1 AUTHOR
 

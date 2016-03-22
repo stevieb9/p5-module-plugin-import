@@ -27,6 +27,10 @@ SYNOPSIS
         use Plugin::Simple sub_name => 'foo';
         @plugins = foo(...);
     
+        # set a default fallback plugin if searching turns up nothing
+    
+        use Plugin::Simple default => 'My::Module::Plugin::DefaultPlugin'
+    
         # do something with the plugins
     
         for my $plugin (@plugins){
@@ -47,11 +51,23 @@ DESCRIPTION
     and loads them (without string eval). You can optionally have us return
     only the plugins that can() perform a specific task.
 
+LOAD OPTIONS
+
+    By default, we force plugins() into your namespace. To change this
+    name:
+
+        use Plugin::Simple sub_name => 'other_name';
+
+    If searching fails, you can ensure a default known plugin gets loaded:
+
+        use Plugin::Simple default => 'My::Plugin';
+
+    To use both options, simply separate them with a comma.
+
 FUNCTIONS/METHODS
 
     None. We simply install a plugin() function within the namespace of the
-    package that used us. To specify a different sub name, use this module
-    as such: use Plugin::Simple sub_name => 'name_of_sub';.
+    package that used us.
 
 AUTHOR
 
