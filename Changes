@@ -1,9 +1,11 @@
 Revision history for Plugin-Simple
 
-0.04    x
+0.04    2016-03-21
         - in scalar context, plugins() will return the first plugin found
         - we now use Module::Load to do the dirty work, as ExtUtils::Installed
-          relies on .packlist files, which not all modules use
+          relies on .packlist files, which not all modules provide
+        - changed certain tests to use local modules instead of skipping
+        - added github links into Makefile.PL (thanks Mohammad Anwar (MANWAR))
 
 0.03    2016-03-21
         - fixed github links
