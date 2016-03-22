@@ -120,9 +120,6 @@ sub _plugins {
             if (-e $item){
                 @plugins = $self->_load($item);
             }
-            else {
-                return undef;
-            }
         }
         else{
             @plugins = $self->_search($pkg, $item);
@@ -131,14 +128,14 @@ sub _plugins {
     if (! @plugins){
         @plugins = _search($pkg);
     }
-    if (! @plugins && $self->{default}){
-        push @plugins, $self->{default};
+    if (! $plugins[0] && $self->{default}){
+        push @plugins, $self->_load($self->{default});
     }
 
     my @wanted_plugins;
 
     if ($can) {
-        for my $mod (@plugins) {
+        for my $mod (@plugins){
             my $can_count = 0;
             for my $sub (@$can){
                 if ($mod->can($sub)){
