@@ -21,4 +21,15 @@ WriteMakefile(
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Plugin-Simple-*' },
+    (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/stevieb9/p5-plugin-simple.git',
+                web  => 'https://github.com/stevieb9/p5-plugin-simple',
+            },
+        }})
+     : ()
+    ),
 );
