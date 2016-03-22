@@ -153,7 +153,7 @@ Plugin::Simple - Load plugins from files or modules.
 
 =for html
 <a href="http://travis-ci.org/stevieb9/p5-plugin-simple"><img src="https://secure.travis-ci.org/stevieb9/p5-plugin-simple.png"/>
-<a href='https://coveralls.io/github/stevieb9/p5-plugin-simple?branch=master'><img src='https://coveralls.io/repos/stevieb9/p5-plugin-simple/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>gg
+<a href='https://coveralls.io/github/stevieb9/p5-plugin-simple?branch=master'><img src='https://coveralls.io/repos/stevieb9/p5-plugin-simple/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
 
 =head1 SYNOPSIS
 
