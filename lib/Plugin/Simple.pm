@@ -59,6 +59,7 @@ sub _search {
 
     if ($item){
         @plugins = grep { $_ =~ /^$item/ } @modules;
+        push @plugins, $item;
     }
     else {
         my $path = $pkg;
@@ -126,6 +127,9 @@ sub _plugins {
     }
     if (! @plugins){
         @plugins = _search($pkg);
+    }
+    if (! @plugins && $self->{default}){
+        push @plugins, $self->{default};
     }
 
     my @wanted_plugins;
