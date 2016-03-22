@@ -7,7 +7,7 @@ use Carp qw(croak);
 use Module::List qw(list_modules);
 use Module::Load;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 my $self;
 
