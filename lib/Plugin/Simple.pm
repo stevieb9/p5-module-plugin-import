@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Carp qw(croak);
+use Cwd qw (abs_path);
 use Module::List qw(list_modules);
 use Module::Load;
 
@@ -59,8 +60,9 @@ sub _search {
                 $path,
                 {
                     list_modules => 1,
-                    recurse => 1}
-                );
+                    recurse => 1
+                }
+            );
         };
         push @plugins, keys %$candidates;
     }
@@ -78,10 +80,10 @@ sub _load {
     my ($self, $plugin) = @_;
 
     if ($plugin =~ /(.*)\W(\w+)\.pm/){
-        unshift @INC, $1,
+        unshift @INC, $1;
         $plugin = $2;
     }
-    elsif ($plugin =~ /(?<!\W)(\w+)\.pm/){
+    elsif ($plugin =~ /^(\w+)\.pm$/){
         unshift @INC, '.';
         $plugin = $1;
     }
@@ -117,8 +119,9 @@ sub _plugins {
 
     if ($item){
         if ($item =~ /(?:\.pm|\.pl)/){
-            if (-e $item){
-                @plugins = $self->_load($item);
+            my $abs_path = abs_path($item);
+            if (-e $abs_path){
+                @plugins = $self->_load($abs_path);
             }
         }
         else{
@@ -131,7 +134,16 @@ sub _plugins {
     if (! $plugins[0] && $self->{default}){
         push @plugins, $self->_load($self->{default});
     }
+    if (! $plugins[0]){
+        if ($item){
+            croak
+            "\npackage $item can't be found, and no default plugin set\n";
+        }
+        else {
+            croak "\npackage can't be found, and no default plugin set\n";
 
+        }
+    }
     my @wanted_plugins;
 
     if ($can) {

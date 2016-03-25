@@ -1,5 +1,11 @@
 Revision history for Plugin-Simple
 
+0.06    2016-03-25
+        - we now croak if a plugin package can't be found and no default is
+          set (closes #4)
+        - package in cwd is now loaded properly (closes #5)
+
+
 0.05    2016-03-22
         - removed _cache()
         - removed _config()

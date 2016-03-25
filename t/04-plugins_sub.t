@@ -9,8 +9,8 @@ use Test::More;
 my $file = 't/base/Testing.pm';
 
 { # can't load plugin
-    my $ret = plugins('blah.pm');
-    is ($ret, undef, "if plugin can't be loaded, ok");
+    eval { plugins('blah.pm'); };
+    like ($@, qr/package .* can't be found/, "if plugin can't be loaded, croak");
 }
 { # file
     my @plugins = plugins($file);
@@ -23,15 +23,6 @@ my $file = 't/base/Testing.pm';
     is ($plugin, 'Testing', "...return is ok in scalar context");
     is ($plugin->hello(), 'hello, world!', "...and the sub output ok");
 }
-
-SKIP: { # module test
-    my @ret = plugins('DateTime');
-
-    skip 'test mod not installed', 2, unless defined $INC{'DateTime.pm'};
-    ok (@ret >= 1, "with an example item, things appear ok");
-    is ($ret[0], 'DateTime', 'returned plugin is correct');
-    can_ok('DateTime', 'new');
-};
 { # can param bad
     my @plugins = plugins($file, can => ['blah']);
     is (@plugins, 0, "if plugin can()t, it isn't returned");
@@ -43,10 +34,6 @@ SKIP: { # module test
 { # can with multiple options
     my @plugins = plugins($file, can => ['hello', 'goodbye']);
     is (@plugins, 1, "if plugin can() multiple, it's returned");
-}
-{ # can w/o item
-    my @plugins = plugins(can => ['hello']);
-    is (@plugins, 0, "'can' can be sent in without item");
 }
 { # can with wrong prototype
     my $ok = eval { plugins(can => ['hello'], 'this'); 1; };
