@@ -8,7 +8,7 @@ use Cwd qw (abs_path);
 use Module::List qw(list_modules);
 use Module::Load;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 my $self;
 
@@ -119,7 +119,14 @@ sub _plugins {
 
     if ($item){
         if ($item =~ /(?:\.pm|\.pl)/){
-            my $abs_path = abs_path($item);
+            my $abs_path;
+            my $ok_file = eval { $abs_path = abs_path($item); 1 };
+
+            if (! $ok_file){
+                croak
+                "\npackage $item can't be found, and no default plugin set\n";
+            }
+
             if (-e $abs_path){
                 @plugins = $self->_load($abs_path);
             }
@@ -141,7 +148,6 @@ sub _plugins {
         }
         else {
             croak "\npackage can't be found, and no default plugin set\n";
-
         }
     }
     my @wanted_plugins;
