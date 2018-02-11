@@ -1,5 +1,8 @@
 Revision history for Plugin-Simple
 
+1.02 UNREL
+        -
+
 1.01    2018-02-11
         - remove perl 5.8 from Travis-CI due to coverage failing to install
 
