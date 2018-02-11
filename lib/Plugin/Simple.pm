@@ -196,7 +196,7 @@ Plugin::Simple - Load plugins from files or modules.
 
     # load/return only the plugins that can perform specific functions
 
-    @plugins = plugins(can => ['foo', 'bar]); # foo and bar
+    @plugins = plugins(can => ['foo', 'bar']); # foo and bar
 
     # instead of importing 'plugins()', change the name:
 
@@ -271,7 +271,7 @@ There are far too many plugin import modules on the CPAN to mention here.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2016 Steve Bertrand.
+Copyright 2016,2017,2018 Steve Bertrand.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

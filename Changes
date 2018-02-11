@@ -3,6 +3,7 @@ Revision history for Plugin-Simple
 0.07    2016-03-28
         - fixed a missed croak() if a plugin file can't be found, breaking
           tests on certain MSWin platforms
+        - fix missing closing single quote in SYNOPSIS (closes #10)
 
 0.06    2016-03-25
         - we now croak if a plugin package can't be found and no default is
