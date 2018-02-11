@@ -8,7 +8,7 @@ use Cwd qw (abs_path);
 use Module::List qw(list_modules);
 use Module::Load;
 
-our $VERSION = '0.07';
+our $VERSION = '1.00';
 
 my $self;
 
@@ -248,22 +248,9 @@ package that C<use>d us.
 
 Steve Bertrand, C<< <steveb at cpan.org> >>
 
-=head2 CONTRIBUTING
-
-Any and all feedback and help is appreciated. A Pull Request is the preferred
-method of receiving changes (L<https://github.com/stevieb9/p5-plugin-simple>),
-but regular patches through the bug tracker, or even just email discussions are
-welcomed.
-
 =head1 BUGS
 
 L<https://github.com/stevieb9/p5-plugin-simple/issues>
-
-=head1 SUPPORT
-
-You can find documentation for this script and module with the perldoc command.
-
-    perldoc Plugin::Simple;
 
 =head1 SEE ALSO
 
