@@ -244,6 +244,51 @@ To use both options, simply separate them with a comma.
 None. We simply install a C<plugins()> function within the namespace of the
 package that C<use>d us.
 
+=head1 EXAMPLE
+
+This example simply uses a single plugin module with a C<plugin_function()>
+function. In the script, we load this file, and check to ensure the plugin does
+in fact have that sub available.
+
+We then call the plugins in a loop (even though in this case there's only one),
+and send in an argument for the plugin to do work on.
+
+=head2 Script
+
+    use warnings;
+    use strict;
+
+    use lib '.';
+
+    use Plugin::Simple;
+
+    my @plugins = plugins(
+        'examples/TestPlugin.pm',
+        can => ['plugin_function']
+    );
+
+    my $plugin_arg = 'Hello!';
+
+    for my $plugin (@plugins){
+        $plugin->plugin_function($plugin_arg);
+    }
+
+=head2 Plugin Module
+
+    package TestPlugin;
+
+    sub plugin_function {
+        shift; # throw away class/obj
+        my ($str) = @_;
+        print "in " . __PACKAGE__ . ", arg is: $str\n";
+    }
+
+    1;
+
+=head2 Output
+
+    in TestPlugin, arg is: Hello!
+
 =head1 AUTHOR
 
 Steve Bertrand, C<< <steveb at cpan.org> >>

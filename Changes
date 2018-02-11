@@ -4,6 +4,7 @@ Revision history for Plugin-Simple
         - fix missing closing single quote in SYNOPSIS (closes #10)
         - remove CONTRIBUTING section in POD (closes #9)
         - fix incorrect sub name in POD and warnings (closes #7)
+        - added example use case in EXAMPLE (closes #8)
 
 0.07    2016-03-28
         - fixed a missed croak() if a plugin file can't be found, breaking
