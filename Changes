@@ -1,7 +1,7 @@
 Revision history for Plugin-Simple
 
-1.01 UNREL
-        -
+1.01    2018-02-11
+        - remove perl 5.8 from Travis-CI due to coverage failing to install
 
 1.00    2018-02-11
         - fix missing closing single quote in SYNOPSIS (closes #10)
