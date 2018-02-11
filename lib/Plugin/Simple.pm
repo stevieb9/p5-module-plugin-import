@@ -110,7 +110,7 @@ sub _plugins {
     }
 
     if (@_){
-        croak "usage: plugin(['Load::From'], [can => 'sub']), " .
+        croak "usage: plugins(['Load::From'], [can => 'sub']), " .
               "in that order\n";
     }
 
@@ -241,7 +241,7 @@ To use both options, simply separate them with a comma.
 
 =head1 FUNCTIONS/METHODS
 
-None. We simply install a C<plugin()> function within the namespace of the
+None. We simply install a C<plugins()> function within the namespace of the
 package that C<use>d us.
 
 =head1 AUTHOR
