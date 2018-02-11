@@ -1,5 +1,8 @@
 Revision history for Plugin-Simple
 
+1.01 UNREL
+        -
+
 1.00    2018-02-11
         - fix missing closing single quote in SYNOPSIS (closes #10)
         - remove CONTRIBUTING section in POD (closes #9)

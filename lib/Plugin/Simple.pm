@@ -8,7 +8,7 @@ use Cwd qw (abs_path);
 use Module::List qw(list_modules);
 use Module::Load;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 my $self;
 
